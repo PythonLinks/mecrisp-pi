@@ -1,29 +1,34 @@
 # Mecrisp-Pi
 
-Mecrisp Pi is a stack based FPGA co-processor for the RP2040 and RP2350 chips
+Mecrisp Pi is a stack based FPGA co-processor, and Forth interpreter, 
+for the RP2040 and RP2350 chips
 running on the
 [Pico-Ice](https://tinyvision.ai/products/pico-ice-fpga-trainer-board)
 and (soon) [Pico2-Ice](https://discord.gg/4X6caMbHCD) circuit boards.
 Mecrisp Pi provides the firmware, Verilog and Forth to connect the two chips.
 
-There are several differrent things you can build with Mecrisp-Pi:
-- a parallel RP2040/2350 coprocessor using 8 DSP blocks.
-- a Jupiter Ace style Forth Computer
+There are many differrent things you can build with Mecrisp-Pi:
+- Data Filters such as PDM to PCM.  
+- an RP2040/2350 coprocessor using the 8 FPGA DSP blocks.
+- a Jupiter Ace style Forth Computer.
 - real time controller with many more I/O ports.
-- very complex I/O devices.  
+- very complex I/O devices.
 
 The newer RP2350 chip in the pico2-ice can drive an DVI/HDMI display. 
-The RP chip has its own FLASH and the software to run a FAT file system which 
-can be accessed from the FPGA. The ICE40 has its own Flash which can be used for a
-block based file system. There are PIO programs which can act as 
-USB host devices.  Additional peripherals can be added with the
-pre-soldered pmods, no need to learn how to solder. Lots of great software runs on the RP chips. 
+Additional peripherals can be added with the
+pre-soldered pmods, no need to learn how to solder. The [Mecrisp Ice
+Interpreter](https://mecrisp-ice.readthedocs.io/en/latest/api.html)
+makes it much easier to debug your hardware designs.   
+
+Forth on the FPGA can access resources running on both cores of the RP chip.
+For example, MicroPython libaries can be used to drive the display. 
+There are PIO programs which can act as USB host devices.  There is 
+software to run a FAT file system on the RP chip's FLASH, which 
+can then be accessed from Forth on the FPGA. The ICE40 also has its own Flash which 
+can be used for a block based file system. 
 
 The ICE40UP5k FPGA can also be used to accelerate parallel
-processes, and provides another 32 GPIO ports.  The [Mecrisp Ice
-Interpreter](https://mecrisp-ice.readthedocs.io/en/latest/api.html)
-makes it much easier to debug your hardware designs.  The RP2350 on
-the new pico2-ice provides DVI output.  4 PMODS ports are available
+processes, or provides another 32 GPIO ports.   4 PMODS ports are available
 for additional functionality. For example, a Diligent I2S2 PMOD can
 provide stereo audio I/O.
 
@@ -41,7 +46,7 @@ This repository includes:
     An extended version of the Hayes-Forth test suite is located in
     ./testsuite. Some of the documentation is in german.
 
-    Pascal simulator is also in ./common-crosscompiler.
+    Pascal simulator is in ./common-crosscompiler.
 
 ## INSTALLATION
 
@@ -55,11 +60,11 @@ First clone the repository
 
 `cd mecrisp-pi/pico-ice`
 
-To flash the gateware on Ubuntu try:
+To flash the gateware on try:
 
 `sudo dfu-util -a 0 -D j1a.bin`
 
-To talk to the fpga, first you have to find the usb devices.
+To talk to the fpga, first you have to find the usb devices. On Ubuntu:
 
 `ls /dev | grep ACM`
 
@@ -95,12 +100,14 @@ And then follow the above instructions for flashing and connecting.
 If you have any problems, please send me an email.
 lozinski@PythonLinks.info
 
+Or post an issue here. 
+
 ## NOTES
 
 Uart communication works.
 
 This repository does not yet include the firmware and gateware for
-spi communication between the RP2040 and the ICE40 FPGA.  The RP2040 side works, I just have to add the FPGA side.  Enjoyable work. 
+spi communication between the RP2040 and the ICE40 FPGA.  The RP2040 side works, I just have to add the FPGA side.  Enjoyable work. SPI send and receive now work in a test bench in the dev branch.  Preogress is fast and enjoyable. 
 
 If you have any questions, please [join the Mecrisp-Pi Discord server](https://discord.gg/DY2HZG5g)
 

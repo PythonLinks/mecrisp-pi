@@ -7,8 +7,10 @@ yosys -q -p "synth_ice40 -dsp -top top -json build/j1a.json -blif build/j1a.blif
 
 echo "Place and Route..."
 
+# Synthesize for pico-ice
 nextpnr-ice40 --freq 12 --up5k --package sg48 --asc build/j1a.txt --pcf verilog/pico-ice.pcf --json build/j1a.json --ignore-loops --pcf-allow-unconstrained
 
+# Synthesize for UPDUINO
 #nextpnr-ice40 --freq 12 --up5k --package sg48 --asc build/j1a.txt --pcf verilog/upduino.pcf --json build/j1a.json --ignore-loops --pcf-allow-unconstrained
 
 echo "Create Bitstream..."

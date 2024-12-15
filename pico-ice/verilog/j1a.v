@@ -2,24 +2,37 @@
 `default_nettype none
 
 `define cfg_divider  104  // 12 MHz / 115200 = 104.17
-
 `include "../common-verilog/uart.v"
-`include "j1-universal-16kb.v"
+`include "./verilog/j1-universal-16kb.v"
 `include "../common-verilog/spi-out.v"
+//`define UPDUINO
+`ifdef UPDUINO
+`include "./verilog/oscillator.v"
+`endif
+
 `include "../common-verilog/spi-in.v"
 
-module top(input  oscillator,
 
+module top(
+           `ifndef UPDUINO
+           input  oscillator,
+           `endif
            output TXD,        // UART TX
            input  RXD,        // UART RX
 
            input reset_button
 );
 
-  // ######   Clock   #########################################
 
+
+// ######   Clock   #########################################
+`ifdef UPDUINO
+   wire		 clk;
+  oscilator oscilator (.clk(clk));
+`else
   wire clk = oscillator;
-
+`endif
+   
   // ######   Reset logic   ###################################
 
   reg [3:0] reset_cnt = 0;

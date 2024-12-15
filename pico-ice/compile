@@ -1,13 +1,15 @@
 #!/bin/bash
 
-# ./compilenucleus
+ ./compilenucleus
 
 echo "Synthesize design..."
-yosys  -q -p "synth_ice40 -dsp -top top -json build/j1a.json -blif build/j1a.blif" verilog/j1a.v
+yosys -q -p "synth_ice40 -dsp -top top -json build/j1a.json -blif build/j1a.blif" verilog/j1a.v
 
 echo "Place and Route..."
-# arachne-pnr -p verilog/j1a.pcf build/j1a.blif -o build/j1a.txt -d 8k
-nextpnr-ice40 --freq 12 --up5k --package sg48 --asc build/j1a.txt --pcf verilog/j1a.pcf --json build/j1a.json --ignore-loops --pcf-allow-unconstrained
+
+nextpnr-ice40 --freq 12 --up5k --package sg48 --asc build/j1a.txt --pcf verilog/pico-ice.pcf --json build/j1a.json --ignore-loops --pcf-allow-unconstrained
+
+#nextpnr-ice40 --freq 12 --up5k --package sg48 --asc build/j1a.txt --pcf verilog/upduino.pcf --json build/j1a.json --ignore-loops --pcf-allow-unconstrained
 
 echo "Create Bitstream..."
 icepack build/j1a.txt build/j1a0.bin

@@ -16,7 +16,7 @@ module j1(
   input  wire interrupt_request
 );
 
-  parameter MEMWORDS = 6144;       // Maximum of 8k words of 16 bits = 16 kb.
+  parameter MEMWORDS = 7680;       // Maximum of 8k words of 16 bits = 16 kb.
   parameter IRQOPCODE = 16'h4001; // Interrupt: Execute "Call 0002".
 
   // ######   MEMORY   ########################################

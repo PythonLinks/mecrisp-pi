@@ -10,9 +10,6 @@ echo "Place and Route..."
 # Synthesize for pico-ice
 nextpnr-ice40 --freq 12 --up5k --package sg48 --asc build/j1a.txt --pcf verilog/pico-ice.pcf --json build/j1a.json --ignore-loops --pcf-allow-unconstrained
 
-# Synthesize for UPDUINO
-#nextpnr-ice40 --freq 12 --up5k --package sg48 --asc build/j1a.txt --pcf verilog/upduino.pcf --json build/j1a.json --ignore-loops --pcf-allow-unconstrained
-
 echo "Create Bitstream..."
 icepack build/j1a.txt build/j1a0.bin
 icemulti -p0 build/j1a0.bin > j1a.bin

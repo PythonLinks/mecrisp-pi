@@ -15,6 +15,19 @@ module top(input  oscillator,
 
            input reset_button
 );
+  // ######   IO PORTS   ######################################
+
+  /*        bit READ            WRITE
+      0001   0  dataIn          dataout??
+      0002   1  spi_in          spi_out
+      0004   2                  boot S0
+      0008   3                  boot S1
+      1000  12  UART RX         UART TX
+      2000  13  misc.in
+      4000  14  ticks           clear ticks
+
+  */
+
 
   // ######   Clock   #########################################
 

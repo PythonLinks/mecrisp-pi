@@ -1290,5 +1290,7 @@ header welcome
     [char] .
     [char] 2 2emit
     [char] 6 emit
+    bl
+    [char] b 2emit
     cr
 ;

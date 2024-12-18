@@ -17,17 +17,6 @@
   );
 
 
-  // ######   IO PORTS   ######################################
-
-  /*        bit READ            WRITE
-
-      0001   1  spi_in          spi_out
-      1000  12  UART RX         UART TX
-      2000  13  misc.in
-      4000  14  ticks           clear ticks
-
-  */
-
   //Data in can be from spi, or from uarts. 
   assign io_din =
     (io_addr[0] ? dataIn : 16'd0) |
@@ -42,7 +31,7 @@
    wire	       MOSI;
    wire [15:0] dataIn;
    
-   assign writeSPI =  io_wr & io_addr[0];
+   assign writeSPI =  io_wr & io_addr[3];
    
    wire	       isWrite;
    assign isWrite = (io_addr == 16'h0001);

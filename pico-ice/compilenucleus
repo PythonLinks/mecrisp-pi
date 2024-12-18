@@ -11,7 +11,7 @@ rm cross.fs instructionset.fs
 echo ""
 
 echo "Compile additional Forth sources..."
-cat ../common-forth/coredefinitions.fs basisdefinitions.fs ../common/double.fs ../common/fixpoint.fs ../common-forth/insight-16kb.fs > included.fs
+cat ../common-forth/coredefinitions.fs basisdefinitions.fs ../common/double.fs ../common/fixpoint.fs  ../common-forth/insight-16kb.fs > included.fs
 ../common-crosscompiler/icecreammachine-16kb build/nucleus.hex build/iceimage.hex included.fs > build/log.txt
 
 md5sum build/nucleus.hex build/iceimage.hex
